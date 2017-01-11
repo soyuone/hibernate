@@ -12,6 +12,9 @@ import com.song.hibernate.service.model.po.UserInfoPO;
 //Hibernate较之另一个ORM框架MyBatis，其更具有面向对象的特征。受Hibernate影响，Java EE规范抛弃了传统的Entity EJB规范，改为使用JPA作为持久层解决方案，而JPA实体完全可以当成Hibernate PO使用
 //面向对象的编程语言和底层关系数据库的发展不协调，催生出了ORM框架，它可以把关系数据库包装成面向对象的模型
 //JPA规范是一种ORM规范，并不提供任何ORM实现，而ORM框架则负责为这些接口提供实现
+
+//Hibernate底层依然是基于JDBC
+
 @SuppressWarnings("deprecation")
 public class HibernatePropertiesMain {
 
