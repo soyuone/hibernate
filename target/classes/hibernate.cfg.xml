@@ -5,12 +5,12 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- 数据库连接 -->
-		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/test</property>
-		<property name="Connection.useUnicode">true</property>
-		<property name="connection.characterEncoding">UTF-8</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password">admin</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test</property>
+		<property name="hibernate.Connection.useUnicode">true</property>
+		<property name="hibernate.connection.characterEncoding">UTF-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">admin</property>
 
 		<!-- 连接池信息 -->
 		<property name="hibernate.c3p0.max_size">20</property>
@@ -28,6 +28,16 @@
 		<property name="show_sql">true</property>
 		<!-- 将SQL脚本格式化后再输出 -->
 		<property name="hibernate.format_sql">true</property>
+
+		<!-- 开启二级缓存，默认关闭 -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<!-- 设置二级缓存区的实现类，Hibernate 4.3支持实现类：EhCacheRegionFactory,InfinispanRegionFactory等 -->
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+
+		<!-- 开启二级缓存的统计功能 -->
+		<property name="hibernate.generate_statistics">true</property>
+		<!-- 设置使用结构化方式来维护缓存项 -->
+		<property name="hibernate.cache.use_structured_entries">true</property>
 
 		<!-- session-factory元素可接受多个mapping元素，每个指定一个持久化类 -->
 		<!-- 映射的持久化对象的类 -->

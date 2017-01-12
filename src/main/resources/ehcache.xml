@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<!-- ehcache缓存需要一个ehcache.xml配置文件 -->
+	<diskStore path="java.io.tmpdir" />
+	
+	<!-- 设置缓存中最多可放多少个对象 -->
+	<!-- 设置缓存是否永久有效 -->
+	<!-- 设置缓存的对象多少秒没有被使用就会清理掉 --> 
+	<!-- 设置缓存的对象在过期之前可以缓存多少秒 -->
+	
+	<!-- 设置缓存是否被持久化到硬盘中 -->
+	<defaultCache
+		maxElementsInMemory="10000"  
+		eternal="false" 
+		timeToIdleSeconds="120" 
+		timeToLiveSeconds="120" 
+		overflowToDisk="true" 
+		diskPersistent="false" /> 
+</ehcache>

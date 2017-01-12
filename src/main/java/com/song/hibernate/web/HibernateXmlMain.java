@@ -9,6 +9,19 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 import com.song.hibernate.service.model.po.UserInfoPO;
 
+/**
+ * <p>
+ * Title: hibernate_[配置文件]_[Xml]
+ * </p>
+ * <p>
+ * Description: [hibernate配置文件置于Xml文件中]
+ * </p>
+ * 
+ * @author songyushi
+ * @version $Revision$ 2017年1月12日
+ * @author (lastest modification by $Author$)
+ * @since 20100901
+ */
 @SuppressWarnings("deprecation")
 public class HibernateXmlMain {
 
