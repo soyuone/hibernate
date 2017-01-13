@@ -7,8 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Where;
 
 //PO = POJO + 持久化注解
 //PO必须在session的管理下才能同步到数据库，session由SessionFactory工厂产生，SessionFactory是数据库编译后的内存镜像，通常一个应用对应一个SessionFactory对象
@@ -21,11 +25,18 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 //PO的三种状态：瞬态，持久化，脱管状态
 
 //Entity声明该类是一个Hibernate的持久化类
-//Table指定该类映射的表
-//Cache指定二级对该类启用二级缓存，缓存策略为READ_WRITE读写缓存(如果程序要求使用序列化事务的隔离级别，则不能使用这种缓存策略)
+//Table指定该类映射的表(name属性默认映射表名与持久化类名相同)
+//Cache指定对该类启用二级缓存，缓存策略为READ_WRITE读写缓存(如果程序要求使用序列化事务的隔离级别，则不能使用这种缓存策略)
+//DynamicUpdate指定用于更新记录的update语句是否在运行时动态生成，并且只更新那些改变过的字段，该属性的默认值是false，开启该属性将导致hibernate需要更多时间生成sql语句
+//Where注解的clause属性可指定一个附加的sql语句过滤条件，只要试图加载该持久化类的对象时，where条件就会生效
+//BatchSize注解的size属性指定hibernate抓取集合属性或延迟加载的实例时每批抓取的实例数
+
 @Entity
 @Table(name = "tb_userinfo")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@DynamicUpdate(true)
+@Where(clause = " id >= 2 ")
+@BatchSize(size = 10)
 public class UserInfoPO {
 
 	private Integer id;// 主键id
@@ -52,6 +63,8 @@ public class UserInfoPO {
 
 	private String lastupdatetime;// 最后更新时间
 
+	private String virtueValue;// 虚拟字段
+
 	public UserInfoPO() {
 	}
 
@@ -74,6 +87,7 @@ public class UserInfoPO {
 
 	// Id持久化标识，通常映射到表的主键列
 	// GeneratedValue指定主键生成策略
+	// Column中name属性默认与成员变量名相同
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -182,6 +196,17 @@ public class UserInfoPO {
 
 	public void setLastupdatetime(String lastupdatetime) {
 		this.lastupdatetime = lastupdatetime;
+	}
+
+	// Formula中的英文括号必须有，内部是sql语句
+	// @Where @Formula作用范围有区别
+	@Formula(value = "(SELECT CONCAT(info.loginaccount,info.jobnumber) FROM tb_userinfo info where info.id = id)")
+	public String getVirtueValue() {
+		return virtueValue;
+	}
+
+	public void setVirtueValue(String virtueValue) {
+		this.virtueValue = virtueValue;
 	}
 
 }

@@ -22,7 +22,7 @@ import com.song.hibernate.service.model.po.UserInfoPO;
  * @since 20100901
  */
 @SuppressWarnings("deprecation")
-public class GetTOUpdateMain {
+public class GetToUpdateMain {
 	public static void main(String[] args) {
 		// 在加载了持久化实例后，实例就处于持久化状态，对持久化实例所作的修改会保存到数据库(会在Session flush前被自动保存到数据库，无须程序调用其它方法，
 		// 不需要调用update方法)
