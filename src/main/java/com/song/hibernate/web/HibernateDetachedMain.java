@@ -41,9 +41,10 @@ public class HibernateDetachedMain {
 		userInfoPO.setUsername("赵明");
 		userInfoPO.setUserpassword("111111");
 		userInfoPO.setLoginaccount("admin");
-		userInfoPO.setJobnumber("2018");
+		userInfoPO.setJobnumber("2019");
 
-		session.save(userInfoPO);
+		// session.save(userInfoPO);
+		session.persist(userInfoPO);
 		tx.commit();
 		session.close();
 
@@ -54,8 +55,10 @@ public class HibernateDetachedMain {
 		// 打开sessionOne
 		Session sessionOne = sf.openSession();
 		Transaction txOne = sessionOne.beginTransaction();
-		sessionOne.update(userInfoPO);
-
+		// 将已经处于脱管状态的对象重新与Session关联
+		//sessionOne.update(userInfoPO);
+		sessionOne.saveOrUpdate(userInfoPO);
+		
 		txOne.commit();
 		sessionOne.close();
 

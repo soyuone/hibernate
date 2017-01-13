@@ -57,7 +57,9 @@ public class HibernateEhcahePropertiesMain {
 		List<UserInfoPO> listPO = (List<UserInfoPO>) sess3.createQuery(" FROM UserInfoPO userInfo ").list();
 		System.out.println(listPO.get(0).getUsername());
 
-		UserInfoPO userInfoPOThree = (UserInfoPO) sess3.load(UserInfoPO.class, 1);
+		//此处使用load或get方法作用相同，load具有延迟加载功能(需要开启延迟加载)
+		//UserInfoPO userInfoPOThree = (UserInfoPO) sess3.load(UserInfoPO.class, 1);
+		UserInfoPO userInfoPOThree = (UserInfoPO)sess3.get(UserInfoPO.class, 1);
 		System.out.println(userInfoPOThree.getUsername());
 		sess3.getTransaction().commit();
 
