@@ -2,10 +2,14 @@ package com.song.hibernate.service.model.po;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
@@ -63,7 +67,13 @@ public class UserInfoPO {
 
 	private String lastupdatetime;// 最后更新时间
 
-	private String virtueValue;// 虚拟字段
+	private String virtueValue;// 虚拟字段，测试@Formula
+
+	private String transientValue;// 虚拟字段，测试@Transient
+
+	private Season season;// 枚举类型
+
+	private String picture;// 测试@Lob
 
 	public UserInfoPO() {
 	}
@@ -207,6 +217,39 @@ public class UserInfoPO {
 
 	public void setVirtueValue(String virtueValue) {
 		this.virtueValue = virtueValue;
+	}
+
+	// 在默认情况下，持久化类的所有属性会自动映射到数据表的数据列。如果在实际应用中不想持久保存某些属性，则可以考虑使用@Transient来修饰
+	@Transient
+	public String getTransientValue() {
+		return transientValue;
+	}
+
+	public void setTransientValue(String transientValue) {
+		this.transientValue = transientValue;
+	}
+
+	// EnumType.ORDINAL底层数据库保存枚举值的序号，EnumType.STRING底层数据库保存枚举值的名称
+	@Enumerated(EnumType.STRING)
+	@Column(name = "season")
+	public Season getSeason() {
+		return season;
+	}
+
+	public void setSeason(Season season) {
+		this.season = season;
+	}
+
+	// hibernate使用@Lob来修饰大数据类型，当持久化类的属性为byte[]、Byte[]、或java.io.Serializable类型时，@Lob修饰的属性将
+	// 映射为底层的Blob列
+	@Lob
+	@Column(name = "picture")
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 }
