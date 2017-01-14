@@ -108,7 +108,7 @@ public class UserInfoPO {
 	}
 
 	// Id持久化标识，通常映射到表的主键列
-	// GeneratedValue指定主键生成策略
+	// GeneratedValue指定主键生成策略.AUTO:hibernate自动选择最适合底层数据库的主键生成策略（默认值），IDENTITY:选择自增长的主键生成策略
 	// Column中name属性默认与成员变量名相同
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
