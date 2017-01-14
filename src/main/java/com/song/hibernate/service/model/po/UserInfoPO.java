@@ -1,9 +1,15 @@
 package com.song.hibernate.service.model.po;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +45,7 @@ import org.hibernate.annotations.Where;
 @Table(name = "tb_userinfo")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @DynamicUpdate(true)
-@Where(clause = " id >= 2 ")
+@Where(clause = " id >= 1 ")
 @BatchSize(size = 10)
 public class UserInfoPO {
 
@@ -65,7 +71,13 @@ public class UserInfoPO {
 
 	private String userclass;// 用户级别
 
-	private String lastupdatetime;// 最后更新时间
+	private Timestamp datetimetest;
+
+	private Date datetest;
+
+	private Time timetest;
+
+	private Timestamp lastupdatetime;// 最后更新时间
 
 	private String virtueValue;// 虚拟字段，测试@Formula
 
@@ -73,14 +85,14 @@ public class UserInfoPO {
 
 	private Season season;// 枚举类型
 
-	private String picture;// 测试@Lob
+	private byte[] picture;// 测试@Lob
 
 	public UserInfoPO() {
 	}
 
 	public UserInfoPO(Integer id, String userid, String loginaccount, String userpassword, String username,
 			String usersex, String jobnumber, String userphone, String usermail, String attachoffice, String userclass,
-			String lastupdatetime) {
+			Timestamp lastupdatetime) {
 		this.id = id;
 		this.userid = userid;
 		this.loginaccount = loginaccount;
@@ -199,12 +211,42 @@ public class UserInfoPO {
 		this.userclass = userclass;
 	}
 
+	@Basic(fetch = FetchType.LAZY)
+	@Column(name = "datetimetest")
+	public Timestamp getDatetimetest() {
+		return datetimetest;
+	}
+
+	public void setDatetimetest(Timestamp datetimetest) {
+		this.datetimetest = datetimetest;
+	}
+
+	@Basic(fetch = FetchType.LAZY)
+	@Column(name = "datetest")
+	public Date getDatetest() {
+		return datetest;
+	}
+
+	public void setDatetest(Date datetest) {
+		this.datetest = datetest;
+	}
+
+	@Basic(fetch = FetchType.LAZY)
+	@Column(name = "timetest")
+	public Time getTimetest() {
+		return timetest;
+	}
+
+	public void setTimetest(Time timetest) {
+		this.timetest = timetest;
+	}
+
 	@Column(name = "lastupdatetime")
-	public String getLastupdatetime() {
+	public Timestamp getLastupdatetime() {
 		return lastupdatetime;
 	}
 
-	public void setLastupdatetime(String lastupdatetime) {
+	public void setLastupdatetime(Timestamp lastupdatetime) {
 		this.lastupdatetime = lastupdatetime;
 	}
 
@@ -241,14 +283,16 @@ public class UserInfoPO {
 	}
 
 	// hibernate使用@Lob来修饰大数据类型，当持久化类的属性为byte[]、Byte[]、或java.io.Serializable类型时，@Lob修饰的属性将
-	// 映射为底层的Blob列
+	// 映射为底层的Blob列，在数据库中列列类型指定为blob类型情况下 持久化对象中可以不用@Lob标注
+	// 延迟加载某一列时使用@Basic(fetch = FetchType.LAZY)，等到真正需要该属性时才从底层数据库中加载数据
 	@Lob
 	@Column(name = "picture")
-	public String getPicture() {
+	@Basic(fetch = FetchType.LAZY)
+	public byte[] getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(byte[] picture) {
 		this.picture = picture;
 	}
 

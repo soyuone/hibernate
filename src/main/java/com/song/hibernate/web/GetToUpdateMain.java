@@ -35,7 +35,7 @@ public class GetToUpdateMain {
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		UserInfoPO userInfoPO = (UserInfoPO) session.load(UserInfoPO.class, 1);
+		UserInfoPO userInfoPO = (UserInfoPO) session.load(UserInfoPO.class, 14);
 		userInfoPO.setUsermail("xiaoming@qq.com");
 		session.getTransaction().commit();
 	}
