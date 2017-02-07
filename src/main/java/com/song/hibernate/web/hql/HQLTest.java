@@ -26,7 +26,7 @@ public class HQLTest {
 
 		// 类似于SQL的规则，出现在SELECT后的属性，要么出现在聚集函数中，要么出现在group by的属性列表中。
 		// having子句用于对分组进行过滤（分组之后的结果），因此having子句只能在有group by子句时才可以使用。
-		// group by子句和order by子句中都不能包含算术表达式
+		// group by子句和order by子句中都不能包含算术表达式；group by子句和order by子句一起使用时 order by子句要在后面.
 		System.out.println();
 		System.out.println("测试HQL GROUP BY & HAVING");
 
