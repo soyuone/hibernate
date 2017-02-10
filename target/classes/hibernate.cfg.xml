@@ -6,7 +6,7 @@
 	<session-factory>
 		<!-- 数据库连接 -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate</property>
 		<property name="hibernate.Connection.useUnicode">true</property>
 		<property name="hibernate.connection.characterEncoding">UTF-8</property>
 		<property name="hibernate.connection.username">root</property>
