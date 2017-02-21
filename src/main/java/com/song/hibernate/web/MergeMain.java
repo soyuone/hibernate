@@ -35,17 +35,17 @@ public class MergeMain {
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		// 当没有调用userInfoPO对象的方法时使用load不会发送sql语句，使用get则会发送sql语句
-		UserInfoPO userInfoPO = (UserInfoPO) session.load(UserInfoPO.class, 3);
+		// 当没有调用userInfoPO对象的方法时使用load不会发送sql语句，使用get则会立即发送sql语句
+		UserInfoPO userInfoPO = (UserInfoPO) session.load(UserInfoPO.class, 1);
 		// UserInfoPO userInfoPO = (UserInfoPO) session.get(UserInfoPO.class, 1);
 
-		userInfoPO.setUsermail("chinam@qq.com");
-		userInfoPO.setSeason(Season.SPRING);
+		//userInfoPO.setUsermail("chinam@qq.com");
+		//userInfoPO.setSeason(Season.SPRING);
 
 		// merge,update,saveOrUpdate当所有属性无任何变动时不会发送sql;merge,update,saveOrUpdate更新时set会包含所有属性
 		// 只有显示指定@DynamicUpdate(true)下才会只更新变更的字段
-		session.merge(userInfoPO);
-		// session.update(userInfoPO);
+		//session.merge(userInfoPO);
+		 //session.update(userInfoPO);
 		// session.saveOrUpdate(userInfoPO);
 		session.getTransaction().commit();
 
