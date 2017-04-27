@@ -1,2 +1,4 @@
-# hibernate
-a hibernate project for learning.
+# hibernate - a learning project.
+Hibernate.
+
+Ehcache.
